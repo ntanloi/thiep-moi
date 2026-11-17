@@ -1,0 +1,14 @@
+{
+  "name": "thiep-tot-nghiep-truong-vu",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Thiệp mời tốt nghiệp bằng HTML, CSS và JavaScript; sổ lưu bút SQLite.",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/*.test.js"
+  }
+}
