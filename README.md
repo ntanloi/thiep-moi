@@ -27,6 +27,7 @@ Bản đầy đủ của mẫu thiệp Trần Lê Trường Vũ, IUH, Tòa E. Kh
 - Lời chúc thật hiển thị bên dưới, lưu SQLite, tải thêm theo trang, cập nhật mỗi 30 giây khi mở trang. Không có lời chúc mẫu hay lời chúc kiểm thử cài sẵn.
 - Giữ nội dung nếu gửi lỗi; gửi lại cùng lần gửi không tạo bản ghi trùng; giới hạn 15 giây giữa hai lời chúc từ cùng địa chỉ mạng.
 - Nội dung lời chúc được hiển thị bằng `textContent`, không thực thi HTML người dùng nhập.
+- **Quy tắc nội dung:** lời chúc (và tên hiển thị) không được chứa từ tục tĩu hoặc từ ngữ nói về tình yêu/thương yêu (yêu, thương, love, 爱, 사랑, trái tim ❤...), dưới mọi hình thức: viết tắt, không dấu, tách chữ, thay ký tự, kéo dài chữ, mọi ngôn ngữ. Kiểm tra ngay trên trình duyệt và kiểm tra lại bắt buộc ở máy chủ. Tên riêng như Thương, Ny, Mến vẫn được dùng ở ô tên. Xem mục "Quy tắc từ ngữ" bên dưới.
 - Chia sẻ thiệp hoặc sao chép liên kết; lời mời theo tên người nhận bằng `?guest=...`.
 - Đếm ngược và tải lịch `.ics` sau khi bạn điền ngày giờ chính thức.
 
@@ -93,6 +94,7 @@ Thiep_tot_nghiep_Truong_Vu_Full/
     app.js            Bản đồ, chia sẻ, sao chép, đếm ngược, lịch
     experience.js     Chuyển động khi cuộn và tương tác chuột
     guestbook.js      Form tiếng Việt và danh sách lời chúc
+    wish-filter.js    Quy tắc từ ngữ (chặn từ tục tĩu và từ về tình yêu)
     assets/           Font, biểu tượng và giấy phép font
   server.js           Máy chủ JavaScript và API SQLite
   package.json        Lệnh khởi động và kiểm tra
@@ -102,6 +104,16 @@ Thiep_tot_nghiep_Truong_Vu_Full/
 ```
 
 Chạy `npm test` nếu muốn kiểm tra API. Các bài kiểm tra dùng thư mục tạm và không ghi vào sổ lưu bút thật.
+
+## Quy tắc từ ngữ trong lời chúc
+
+- Toàn bộ nằm trong **`public/wish-filter.js`** (một file dùng chung cho trình duyệt, `server.js` và `api/wishes.js`). Muốn thêm hoặc bớt từ, sửa các danh sách trong phần `LEXICON`, rồi chạy `npm test`.
+- Bị chặn: từ tục tĩu, chửi thề, tình dục, lăng mạ nặng; từ nói về tình yêu như yêu, thương, iu, ny, love, luv, ily, amor, 爱, 사랑...; trái tim ❤ ♡ 💕, `<3`; mã số tình yêu như 520.
+- Nhận diện cả: viết hoa/thường, không dấu, tách chữ (`l o v e`, `c.ặ.c`), thay ký tự (`l0ve`, `sh!t`, `f*ck`), kéo dài chữ (`yêuuuu`), chữ giống nhau của bảng chữ cái khác, và nhiều ngôn ngữ.
+- Từ tiếng Việt chỉ bị chặn đúng dấu: `thương` bị chặn nhưng `thường`, `thượng` thì không; `yêu` bị chặn nhưng `yếu` thì không. Riêng bản **không dấu** (`thuong`, `yeu`, `buoi`, `cac`, `lon`...) không phân biệt được nên bị chặn; người dùng chỉ cần gõ có dấu.
+- Ô **tên** được phép dùng tên riêng `Thương`, `Ny`, `Mến`.
+- Thông báo lỗi không nêu từ vi phạm. Máy chủ trả mã 400 và lời chúc không được lưu.
+- Danh sách không thể đầy đủ mãi mãi; nếu gặp từ lọt qua, thêm từ đó vào `LEXICON`.
 
 ## Đưa lên Vercel (có sổ lưu bút)
 

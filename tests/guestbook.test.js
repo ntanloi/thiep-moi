@@ -164,3 +164,24 @@ test('Từ chối JSON lỗi, UTF-8 lỗi và phần thân quá lớn mà không
   }
   assert.equal((await (await f.get()).json()).total, 0);
 });
+
+test('Từ chối lời chúc tục tĩu hoặc nói về tình yêu và không lưu vào cơ sở dữ liệu', async t => {
+  const f = await fixture(t);
+  const attempts = [
+    wish({ message: 'Chúc bạn thành công, địt mẹ' }), wish({ message: 'Yêu bạn nhiều' }), wish({ message: 'chuc ban thuong xuyen vui' }),
+    wish({ message: 'I love you' }), wish({ message: 'Cặc' }), wish({ message: 'l.o.v.e' }), wish({ message: 'Vui lắm ❤️' }),
+    wish({ name: 'Yêu Em' }), wish({ message: '我爱你' }), wish({ message: 'lol' })
+  ];
+  for (const input of attempts) {
+    const response = await f.post(input);
+    assert.equal(response.status, 400, JSON.stringify(input.message));
+    const body = await response.json();
+    assert.match(body.error, /chưa phù hợp/);
+  }
+  const list = await (await f.get()).json();
+  assert.equal(list.total, 0);
+  assert.deepEqual(list.wishes, []);
+  // Lời chúc lành mạnh vẫn gửi được, kể cả khi tên là "Thương".
+  const ok = await f.post(wish({ name: 'Nguyễn Thị Thương', message: 'Chúc bạn thường xuyên gặp may mắn!' }));
+  assert.equal(ok.status, 201);
+});

@@ -7,6 +7,7 @@
  *   (hoặc KV_REST_API_URL và KV_REST_API_TOKEN)
  */
 import { createHash } from 'node:crypto';
+import { checkWish } from '../public/wish-filter.js';
 
 const PAGE_SIZE = 12;
 const MAX_BODY_BYTES = 8000;
@@ -139,6 +140,9 @@ async function createWish(req, res) {
       controls.test(input.name) || controls.test(message)) {
     return send(res, 400, { error: 'Tên từ 1–60 ký tự; lời chúc từ 3–500 ký tự nhé.' });
   }
+  // Quy tắc nội dung: không từ tục tĩu, không từ ngữ về tình yêu (xem public/wish-filter.js).
+  const rule = checkWish({ name, message });
+  if (!rule.ok) return send(res, 400, { error: rule.error });
 
   // Gửi lại cùng một lần (mất mạng rồi thử lại): trả lại bản ghi cũ, không tạo trùng.
   const replay = async (raw) => {

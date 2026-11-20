@@ -20,13 +20,17 @@
     ? 'Bạn chạy máy chủ đi kèm rồi mở http://127.0.0.1:3000 để dùng sổ lưu bút nhé.'
     : error instanceof TypeError ? 'Chưa kết nối được sổ lưu bút. Bạn thử lại nhé.' : error.message;
   let composing = false;
+  // Bộ lọc từ ngữ dùng chung với máy chủ. Máy chủ vẫn kiểm tra lại bắt buộc nên nếu nạp lỗi thì chỉ mất cảnh báo sớm.
+  let wishFilter = null;
+  import('./wish-filter.js').then((module) => { wishFilter = module; validateVietnamese(); }).catch(() => {});
   const validateVietnamese = () => {
     const nameLength = vietnameseText(nameField.value).trim().replace(/\s+/g, ' ').length;
     const messageLength = vietnameseText(messageField.value).trim().length;
     const trimmedLength = vietnameseText(messageField.value).trim().length;
     $('wish-count').textContent = `${messageLength} / 500`;
-    nameField.setCustomValidity(nameLength > 60 ? 'Tên của bạn tối đa 60 ký tự nhé.' : nameField.value && !nameLength ? 'Bạn nhập tên của mình nhé.' : '');
-    messageField.setCustomValidity(trimmedLength > 500 ? 'Lời chúc tối đa 500 ký tự nhé.' : messageField.value && trimmedLength < 3 ? 'Bạn viết lời chúc từ 3 ký tự nhé.' : '');
+    const rule = wishFilter ? wishFilter.checkWish({ name: vietnameseText(nameField.value), message: vietnameseText(messageField.value) }) : { ok: true };
+    nameField.setCustomValidity(nameLength > 60 ? 'Tên của bạn tối đa 60 ký tự nhé.' : nameField.value && !nameLength ? 'Bạn nhập tên của mình nhé.' : !rule.ok && rule.field === 'name' ? rule.error : '');
+    messageField.setCustomValidity(trimmedLength > 500 ? 'Lời chúc tối đa 500 ký tự nhé.' : messageField.value && trimmedLength < 3 ? 'Bạn viết lời chúc từ 3 ký tự nhé.' : !rule.ok && rule.field === 'message' ? rule.error : '');
   };
   // Keep the browser's Vietnamese IME in control until a syllable is committed.
   form.addEventListener('compositionstart', () => { composing = true; });

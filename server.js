@@ -10,6 +10,7 @@ import { mkdirSync } from 'node:fs';
 import { readFile, realpath, stat } from 'node:fs/promises';
 import { resolve, dirname, extname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { checkWish } from './public/wish-filter.js';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const pageSize = 12;
@@ -156,6 +157,9 @@ export function createApp({
         controls.test(input.name) || controls.test(message)) {
       return json(response, 400, { error: 'Tên từ 1–60 ký tự; lời chúc từ 3–500 ký tự nhé.' });
     }
+    // Quy tắc nội dung: không từ tục tĩu, không từ ngữ về tình yêu (xem public/wish-filter.js).
+    const rule = checkWish({ name, message });
+    if (!rule.ok) return json(response, 400, { error: rule.error });
     // Trả lại cùng bản ghi nếu trình duyệt gửi lại sau khi mất kết nối.
     const existing = findWish.get(id);
     if (existing) {
