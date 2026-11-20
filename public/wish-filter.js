@@ -76,13 +76,13 @@ const LEXICON = {
     loose: [
       'fuck', 'shit', 'bitch', 'bastard', 'asshole', 'cocksuck', 'dickhead', 'pussy', 'whore', 'slut', 'nigger', 'nigga', 'faggot',
       'motherfuck', 'bullshit', 'masturbat', 'dildo', 'blowjob', 'handjob', 'bollocks', 'porn', 'vaffanculo', 'hurensohn',
-      'cailon', 'caideoma', 'caiditme', 'ditme', 'ditmemay', 'ditconme', 'ditcume', 'dumemay', 'dumamay', 'concac', 'conkec',
+      'cailon', 'caideoma', 'caidelma', 'caidelmay', 'caidelme', 'caiditme', 'ditme', 'ditmemay', 'ditconme', 'ditcume', 'dumemay', 'dumamay', 'concac', 'conkec',
       'conlon', 'deomay', 'deoma', 'deome', 'ditmay', 'phimsex', 'chatsex',
       'caonima', 'tamade', 'sharmouta', 'putamadre', 'hijodeputa', 'hijueputa', 'filhodaputa', 'sonofabitch'
     ],
     phrase: [
       ['địt', 'mẹ'], ['địt', 'con'], ['địt', 'cụ'], ['địt', 'bà'], ['đụ', 'mẹ'], ['đụ', 'mày'], ['đụ', 'má'],
-      ['con', 'cặc'], ['cái', 'cặc'], ['cái', 'lồn'], ['con', 'lồn'], ['cái', 'đéo'], ['đéo', 'mẹ'], ['đéo', 'má'], ['đéo', 'biết'],
+      ['con', 'cặc'], ['cái', 'cặc'], ['cái', 'lồn'], ['con', 'lồn'], ['cái', 'đéo'], ['cái', 'đél'], ['cái', 'đel'], ['đéo', 'mẹ'], ['đéo', 'má'], ['đéo', 'biết'],
       ['vãi', 'lồn'], ['vãi', 'cặc'], ['vãi', 'lìn'], ['vãi', 'đái'], ['bú', 'cu'], ['bú', 'cặc'], ['bú', 'buồi'], ['bú', 'lồn'],
       ['liếm', 'lồn'], ['liếm', 'cặc'], ['làm', 'tình'], ['phim', 'sex'], ['gái', 'gọi'], ['chó', 'đẻ'], ['chó', 'chết'], ['đồ', 'chó'],
       ['mẹ', 'mày'], ['mẹ', 'kiếp'], ['con', 'mẹ', 'nó'], ['nứng', 'lồn'], ['chich', 'nhau'], ['son', 'of', 'a', 'bitch'],

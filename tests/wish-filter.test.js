@@ -13,7 +13,7 @@ test('Chặn từ tục tĩu tiếng Việt, viết tắt, không dấu, tách c
   blocked([
     'Cặc', 'kẹc', 'lol', 'LOL', 'lồn', 'cailon', 'cai lon', 'caideoma', 'cái đéo mà', 'đụ má mày', 'địt mẹ', 'ditme', 'dit me',
     'd.i.t m.e', 'đ m', 'đm', 'dcm', 'vcl', 'vl', 'vui vl', 'l ồ n', 'đ*t', 'c*c', 'l*n', 'cặc cặc', 'l0l', 'đ!t', 'c-ặ-c',
-    'Chúc bạn thành công, địt mẹ nó', 'concac', 'cmn', 'cc', 'địtttt', 'đéo'
+    'Chúc bạn thành công, địt mẹ nó', 'concac', 'caidelma', 'cái đél má', 'cai del ma', 'CAIDELMA', 'cmn', 'cc', 'địtttt', 'đéo'
   ]);
 });
 
