@@ -4,7 +4,7 @@ window.GRADUATION = {
   shortName: 'Trường Vũ',
   school: 'Trường Đại học Công nghiệp TP.HCM',
   year: '2026',
-  start: '', // Ví dụ định dạng: 2026-11-25T08:00:00+07:00
+  start: '2026-11-25T10:30:00+07:00', // 10:30 ngày 25/11/2026 (giờ Việt Nam)
   end: '',
   venueConfirmed: true,
   venue: 'Tòa E · IUH',
